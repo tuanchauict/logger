@@ -47,7 +47,7 @@ final class LoggerPrinter extends Logger {
     /**
      * It is used to determine log settings such as method count, thread info visibility
      */
-    private static final Settings settings = new Settings();
+    private final Settings settings = new Settings();
 
     /**
      * Drawing toolbox
@@ -360,6 +360,7 @@ final class LoggerPrinter extends Logger {
     private int getMethodCount() {
         Integer count = LOCAL_METHOD_COUNT.get();
         int result = settings.getMethodCount();
+        System.out.println("method count = " + result);
         if (count != null) {
             LOCAL_METHOD_COUNT.remove();
             result = count;

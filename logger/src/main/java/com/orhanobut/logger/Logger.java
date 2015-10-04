@@ -17,7 +17,7 @@ public abstract class Logger {
     public static Logger getLocalLoggerWithTagAndMethodCount(String tag, int count){
         Logger printer = new LoggerPrinter();
         printer.init(tag);
-        printer.t(null, count);
+        printer.getSettings().setMethodCount(count);
         return printer;
     }
 
