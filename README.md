@@ -1,182 +1,47 @@
-[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Logger-brightgreen.svg?style=flat)](http://android-arsenal.com/details/1/1658) [![](https://img.shields.io/badge/AndroidWeekly-%23147-blue.svg)](http://androidweekly.net/issues/issue-147)
-[![Join the chat at https://gitter.im/orhanobut/logger](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/orhanobut/logger?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+This is a hacked version of [Logger by Orhan Obut](https://github.com/orhanobut/logger).
 
-<img align="right" src='https://github.com/orhanobut/logger/blob/master/images/logger-logo.png' width='128' height='128'/>
+# What have been changed in this hacked?
 
-###Logger
-Simple, pretty and powerful logger for android
-
-Logger provides :
-- Thread information
-- Class information
-- Method information
-- Pretty-print for json content
-- Pretty-print for new line "\n"
-- Clean output
-- Jump to source
-
-### Gradle
-```groovy
-compile 'com.orhanobut:logger:1.11'
-```
-
-### Current Log system
-```java
-Log.d(TAG,"hello");
-```
-
-<img src='https://github.com/orhanobut/logger/blob/master/images/current-log.png'/>
+    Logger.v        -->      SLogger.v
+    Logger.d        -->      SLogger.d
+    Logger.i        -->      SLogger.i
+    Logger.w        -->      SLogger.w
+    Logger.e        -->      SLogger.e
+    Logger.wtf      -->      SLogger.wtf
+    Logger.json     -->      SLogger.json
+    Logger.xml      -->      SLogger.xml
 
 
-### Logger
-```java
-Logger.d("hello");
-Logger.d("hello %s %d", "world", 5);   // String.format
-```
-<img src='https://github.com/orhanobut/logger/blob/master/images/description.png'/>
+Q: Are you joking?
 
-### Usage
-```java
-Logger.d("hello");
-Logger.e("hello");
-Logger.w("hello");
-Logger.v("hello");
-Logger.wtf("hello");
-Logger.json(JSON_CONTENT);
-Logger.xml(XML_CONTENT);
-```
+A: Er, Nope!
 
-### Change TAG
-All logs
-```java
-Logger.init(YOUR_TAG);
-```
-Log based
-```java
-Logger.t("mytag").d("hello");
-```
-<img src='https://github.com/orhanobut/logger/blob/master/images/custom-tag.png'/>
+Q: What's new dude?
 
+# What new?
 
-### Settings (optional)
-Change the settings with init. This should be called only once. Best place would be in application class. All of them
- are optional.
-```java
-public class MyApplication extends Application {
+    Logger LOG1 = Logger.getLocalLogger();
+    Logger LOG2 = Logger.getLocalLoggerWithTag("YOUR TAG");
+    Logger LOG3 = Logger.getLocalLoggerWithTagAndMethodCount("YOUR NEW TAG", 3);
 
-    @Override
-    public void onCreate() {
-        super.onCreate();
+    LOG1.d("This with default tag");
+    LOG2.d("This changes tag to YOUR TAG");
+    LOG3.d("This changes tag to YOUR NEW TAG and has 3 lines of method count");
 
-        Logger
-             .init(YOUR_TAG)               // default PRETTYLOGGER or use just init()
-             .setMethodCount(3)            // default 2
-             .hideThreadInfo()             // default shown
-             .setLogLevel(LogLevel.NONE);  // default LogLevel.FULL
-             .setMethodOffset(2)           // default 0
-    }
-}
-```
-Note: Use LogLevel.NONE for the release versions.
+    LOG1.off();
+    LOG1.d("This is not shown!");
+    LOG1.on();
+    LOG1.d("This is logged again!");
 
-### More log samples
-```java
-Logger.d("hello");
-Logger.e(exception, "message");
-Logger.json(JSON_CONTENT);
-```
-<img src='https://github.com/orhanobut/logger/blob/master/images/logger-log.png'/>
-
-### Method info
-Observe the caller methods in the order they are invoked and also thread information.
-```java
-void methodA(){
-   methodB();
-}
-void methodA(){
-   Logger.d("hello");
-}
-```
-Both method information will be shown in the order of invocation.
-
-<img src='https://github.com/orhanobut/logger/blob/master/images/two-method-with-thread-desc.png'/>
-
-### Change method count (Default: 2)
-All logs
-```java
-Logger.init().setMethodCount(1);
-```
-Log based
-```java
-Logger.t(1).d("hello");
-```
-
-<img src='https://github.com/orhanobut/logger/blob/master/images/one-method-with-thread.png'/>
-
-### Change method stack offset (Default: 0)
-To integrate logger with other libraries, you can set the offset in order to avoid that library's methods.
-```java
-Logger.init().setMethodOffset(5);
-```
-
-### Hide thread information
-```java
-Logger.init().setMethodCount(1).hideThreadInfo();
-```
-
-<img src='https://github.com/orhanobut/logger/blob/master/images/one-method-no-header.png'/>
-
-### Only show the message
-```java
-Logger.init().setMethodCount(0).hideThreadInfo();
-```
-
-<img src='https://github.com/orhanobut/logger/blob/master/images/just-content.png'/>
-
-### Pretty print json, Logger.json
-Format the json content in a pretty way
-```java
-Logger.json(YOUR_JSON_DATA);
-```
-
-<img src='https://github.com/orhanobut/logger/blob/master/images/json-log.png'/>
-
-### Log exceptions in a simple way
-Show the cause of the exception
-```java
-Logger.e(exception,"message");
-```
-
-### Notes
-- Use the filter for a better result
-
-<img src='https://github.com/orhanobut/logger/blob/master/images/filter.png'/>
-
-- Make sure that the wrap option is disabled
-
-<img src='https://github.com/orhanobut/logger/blob/master/images/wrap-closed.png'/>
+    Logger.globalOff();
+    LOG1.d("NOTHING");
+    LOG2.d("IS");
+    LOG3.d("SHOWN");
+    Logger.globalOn();
+    LOG1.d("Yeah! I'm here");
 
 
-#### You might also like
-- [Hawk](https://github.com/orhanobut/hawk) Simple,powerful,secure key-value storage
-- [Wasp](https://github.com/orhanobut/wasp) All-in-one network solution
-- [Bee](https://github.com/orhanobut/bee) QA/Debug tool
-- [DialogPlus](https://github.com/orhanobut/dialogplus) Easy,simple dialog solution
-- [SimpleListView](https://github.com/orhanobut/simplelistview) Simple basic listview implementation with linearlayout
+# Installation
 
-###License
-<pre>
-Copyright 2015 Orhan Obut
+Just pull this project and add it into your project. Sorry, I haven't published on Maven yet.
 
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-</pre>

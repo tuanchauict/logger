@@ -21,54 +21,28 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        SLogger.init("test").hideThreadInfo().setMethodCount(3).setMethodOffset(2);
-        LOG.i("default");
-        LOG2.w("Con heo");
-        LOG.off();
-        LOG.d("This is not shown!");
-        LOG.on();
-        LOG.d("This is displayed again");
-        LOG3.d("This is LOG3");
 
+        Logger LOG1 = Logger.getLocalLogger();
+        Logger LOG2 = Logger.getLocalLoggerWithTag("YOUR TAG");
+        Logger LOG3 = Logger.getLocalLoggerWithTagAndMethodCount("YOUR NEW TAG", 3);
 
-//        printNormalLog();
-//        printPretty();
+        LOG1.d("This with default tag");
+        LOG2.d("This changes tag to YOUR TAG");
+        LOG3.d("This changes tag to YOUR NEW TAG and has 3 lines of method count");
+
+        LOG1.off();
+        LOG1.d("This is not shown!");
+        LOG1.on();
+        LOG1.d("This is logged again!");
+
+        Logger.globalOff();
+        LOG1.d("NOTHING");
+        LOG2.d("IS");
+        LOG3.d("SHOWN");
+        Logger.globalOn();
+        LOG1.d("Yeah! I'm here");
+
     }
 
-    void printNormalLog() {
-        Log.v(TAG, "hey i am a log which you don't see easily");
-        Log.v(TAG, "i = 0 + 1");
-        Log.v(TAG, Dummy.JSON_WITH_NO_LINE_BREAK);
-        Log.v("test", Dummy.JSON_WITH_LINE_BREAK);
-    }
-
-    void printPretty() {
-        test2();
-        Foo.foo();
-
-        try {
-            Class clazz = Class.forName("asdfasd");
-        } catch (ClassNotFoundException e) {
-            SLogger.e(e, "something happened");
-        }
-
-        String test = "[" + Dummy.JSON_WITH_NO_LINE_BREAK + "," + Dummy.JSON_WITH_NO_LINE_BREAK + "]";
-
-        SLogger.json(Dummy.SMALL_SON_WITH_NO_LINE_BREAK);
-
-        SLogger.d("test");
-
-        SLogger.t("TEST", 3).d("asdfasdf");
-    }
-
-    void test2() {
-        SLogger.v("test2");
-        SLogger.v("test3");
-        SLogger.v("MYTAG");
-        SLogger.wtf("test3");
-        SLogger.d("logger with tag");
-        SLogger.t("tag").d("logger with tag");
-        SLogger.t("tag", 3).d("logger with 3 method count");
-    }
 
 }
