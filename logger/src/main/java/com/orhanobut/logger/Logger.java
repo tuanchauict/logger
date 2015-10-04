@@ -1,94 +1,65 @@
 package com.orhanobut.logger;
 
 /**
- * Logger is a wrapper of {@link android.util.Log}
- * But more pretty, simple and powerful
- *
  * @author Orhan Obut
  */
-public final class Logger {
+public abstract class Logger {
+    public static Logger getLocalLogger() {
+        return new LoggerPrinter();
+    }
 
-  private static final Printer printer = new LoggerPrinter();
-  private static final String DEFAULT_TAG = "PRETTYLOGGER";
+    public static Logger getLocalLoggerWithTag(String tag) {
+        Logger printer = new LoggerPrinter();
+        printer.init(tag);
+        return printer;
+    }
 
-  //no instance
-  private Logger() {
-  }
+    public static Logger getLocalLoggerWithTagAndMethodCount(String tag, int count){
+        Logger printer = new LoggerPrinter();
+        printer.init(tag);
+        printer.t(null, count);
+        return printer;
+    }
 
-  /**
-   * It is used to get the settings object in order to change settings
-   *
-   * @return the settings object
-   */
-  public static Settings init() {
-    return printer.init(DEFAULT_TAG);
-  }
+    public static boolean globalOn = true;
 
-  /**
-   * It is used to change the tag
-   *
-   * @param tag is the given string which will be used in Logger
-   */
-  public static Settings init(String tag) {
-    return printer.init(tag);
-  }
+    public static void globalOn(){
+        globalOn = true;
+    }
 
-  public static Printer t(String tag) {
-    return printer.t(tag, printer.getSettings().getMethodCount());
-  }
+    public static void globalOff(){
+        globalOn = false;
+    }
 
-  public static Printer t(int methodCount) {
-    return printer.t(null, methodCount);
-  }
+    public static boolean isGlobalOn(){
+        return globalOn;
+    }
 
-  public static Printer t(String tag, int methodCount) {
-    return printer.t(tag, methodCount);
-  }
+    public abstract Logger t(String tag, int methodCount);
 
-  public static void d(String message, Object... args) {
-    printer.d(message, args);
-  }
+    public abstract Settings init(String tag);
 
-  public static void e(String message, Object... args) {
-    printer.e(null, message, args);
-  }
+    public abstract Settings getSettings();
 
-  public static void e(Throwable throwable, String message, Object... args) {
-    printer.e(throwable, message, args);
-  }
+    public abstract void on();
 
-  public static void i(String message, Object... args) {
-    printer.i(message, args);
-  }
+    public abstract void off();
 
-  public static void v(String message, Object... args) {
-    printer.v(message, args);
-  }
+    public abstract void d(String message, Object... args);
 
-  public static void w(String message, Object... args) {
-    printer.w(message, args);
-  }
+    public abstract void e(String message, Object... args);
 
-  public static void wtf(String message, Object... args) {
-    printer.wtf(message, args);
-  }
+    public abstract void e(Throwable throwable, String message, Object... args);
 
-  /**
-   * Formats the json content and print it
-   *
-   * @param json the json content
-   */
-  public static void json(String json) {
-    printer.json(json);
-  }
+    public abstract void w(String message, Object... args);
 
-  /**
-   * Formats the json content and print it
-   *
-   * @param xml the xml content
-   */
-  public static void xml(String xml) {
-    printer.xml(xml);
-  }
+    public abstract void i(String message, Object... args);
 
+    public abstract void v(String message, Object... args);
+
+    public abstract void wtf(String message, Object... args);
+
+    public abstract void json(String json);
+
+    public abstract void xml(String xml);
 }

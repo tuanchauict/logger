@@ -5,51 +5,65 @@ package com.orhanobut.logger;
  */
 public final class Settings {
 
-  private int methodCount = 2;
-  private boolean showThreadInfo = true;
-  private int methodOffset = 0;
+    private boolean on = true;
 
-  /**
-   * Determines how logs will printed
-   */
-  private LogLevel logLevel = LogLevel.FULL;
+    private int methodCount = 2;
+    private boolean showThreadInfo = true;
+    private int methodOffset = 0;
 
-  public Settings hideThreadInfo() {
-    showThreadInfo = false;
-    return this;
-  }
+    /**
+     * Determines how logs will printed
+     */
+    private LogLevel logLevel = LogLevel.FULL;
 
-  public Settings setMethodCount(int methodCount) {
-    if (methodCount < 0) {
-      methodCount = 0;
+    public Settings hideThreadInfo() {
+        showThreadInfo = false;
+        return this;
     }
-    this.methodCount = methodCount;
-    return this;
-  }
 
-  public Settings setLogLevel(LogLevel logLevel) {
-    this.logLevel = logLevel;
-    return this;
-  }
+    public Settings setMethodCount(int methodCount) {
+        if (methodCount < 0) {
+            methodCount = 0;
+        }
+        this.methodCount = methodCount;
+        return this;
+    }
 
-  public Settings setMethodOffset(int offset) {
-    this.methodOffset = offset;
-    return this;
-  }
+    public Settings setLogLevel(LogLevel logLevel) {
+        this.logLevel = logLevel;
+        return this;
+    }
 
-  public int getMethodCount() {
-    return methodCount;
-  }
+    public Settings setMethodOffset(int offset) {
+        this.methodOffset = offset;
+        return this;
+    }
 
-  public boolean isShowThreadInfo() {
-    return showThreadInfo;
-  }
+    public int getMethodCount() {
+        return methodCount;
+    }
 
-  public LogLevel getLogLevel() {
-    return logLevel;
-  }
+    public boolean isShowThreadInfo() {
+        return showThreadInfo;
+    }
 
-  public int getMethodOffset() {
-    return methodOffset;
-  }
+    public LogLevel getLogLevel() {
+        return logLevel;
+    }
+
+    public int getMethodOffset() {
+        return methodOffset;
+    }
+
+    public void on() {
+        this.on = true;
+    }
+
+    public void off() {
+        this.on = false;
+    }
+
+    public boolean isOn() {
+        return this.on;
+    }
 }

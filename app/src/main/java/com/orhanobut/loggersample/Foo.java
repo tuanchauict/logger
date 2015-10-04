@@ -1,6 +1,6 @@
 package com.orhanobut.loggersample;
 
-import com.orhanobut.logger.Logger;
+import com.orhanobut.logger.SLogger;
 
 /**
  * @author Orhan Obut
@@ -8,6 +8,6 @@ import com.orhanobut.logger.Logger;
 public class Foo {
 
     public static void foo(){
-        Logger.d("hello");
+        SLogger.d("hello");
     }
 }
