@@ -1,4 +1,4 @@
-This is a hacked version of [Logger by Orhan Obut](https://github.com/orhanobut/logger).
+This is a hacked version of [Logger](https://github.com/orhanobut/logger) by Orhan Obut.
 
 # What have been changed in this hacked?
 
@@ -46,3 +46,6 @@ Q: What's new dude?
 Just pull this project and add it into your project. Sorry, I haven't published on Maven yet.
 
 
+# License
+
+Based on [Logger](https://github.com/orhanobut/logger) by Orhan Obut (The Apache Software License, Version 2.0). 
