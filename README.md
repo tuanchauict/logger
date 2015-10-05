@@ -13,10 +13,8 @@ This is a hacked version of [Logger](https://github.com/orhanobut/logger) by Orh
 
 
 Q: Are you joking?
-
 A: Er, Nope!
-
-Q: What's new dude?
+Q: Shut up and tell me What new, dude?
 
 # What new?
 
