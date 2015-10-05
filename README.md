@@ -5,27 +5,14 @@ whole project.
 
 # What have been changed in this hacked?
 
-    Logger.v        -->      SLogger.v
-    Logger.d        -->      SLogger.d
-    Logger.i        -->      SLogger.i
-    Logger.w        -->      SLogger.w
-    Logger.e        -->      SLogger.e
-    Logger.wtf      -->      SLogger.wtf
-    Logger.json     -->      SLogger.json
-    Logger.xml      -->      SLogger.xml
+Nothing. This can work well with the old Logger, just take a look at Installation to know how to use
 
-
-Q: Are you joking?
-
-A: Er, Nope!
-
-Q: Shut up and tell me What new, dude?
 
 # What new?
 
-    Logger LOG1 = Logger.getLocalLogger();
-    Logger LOG2 = Logger.getLocalLoggerWithTag("YOUR TAG");
-    Logger LOG3 = Logger.getLocalLoggerWithTagAndMethodCount("YOUR NEW TAG", 3);
+    LLogger LOG1 = LLogger.getLocalLogger();
+    LLogger LOG2 = LLogger.getLocalLoggerWithTag("YOUR TAG");
+    LLogger LOG3 = LLogger.getLocalLoggerWithTagAndMethodCount("YOUR NEW TAG", 3);
 
     LOG1.d("This with default tag");
     LOG2.d("This changes tag to YOUR TAG");
@@ -36,11 +23,11 @@ Q: Shut up and tell me What new, dude?
     LOG1.on();
     LOG1.d("This is logged again!");
 
-    Logger.globalOff();
+    Logger.globalOff(); // or LLogger.globalOff();
     LOG1.d("NOTHING");
     LOG2.d("IS");
     LOG3.d("SHOWN");
-    Logger.globalOn();
+    Logger.globalOn(); // or LLogger.globalOn();
     LOG1.d("Yeah! I'm here");
 
 
@@ -56,7 +43,7 @@ Add new repository to your module `build.gradle`
 
 and dependencies:
 
-    compile 'com.tuanchauict.logger:logger:1.0.0'
+    compile 'com.tuanchauict.logger:logger:1.0.1'
 
 
 # License

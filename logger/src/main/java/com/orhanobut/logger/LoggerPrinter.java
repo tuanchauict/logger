@@ -19,12 +19,12 @@ import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
 /**
- * SLogger is a wrapper of {@link Log}
+ * Logger is a wrapper of {@link Log}
  * But more pretty, simple and powerful
  *
  * @author Orhan Obut
  */
-final class LoggerPrinter extends Logger {
+final class LoggerPrinter extends LLogger {
 
 
     /**
@@ -79,7 +79,7 @@ final class LoggerPrinter extends Logger {
     /**
      * It is used to change the tag
      *
-     * @param tag is the given string which will be used in SLogger
+     * @param tag is the given string which will be used in Logger
      */
     @Override
     public Settings init(String tag) {
@@ -107,7 +107,7 @@ final class LoggerPrinter extends Logger {
     }
 
     @Override
-    public Logger t(String tag, int methodCount) {
+    public LLogger t(String tag, int methodCount) {
         if (tag != null) {
             LOCAL_TAG.set(tag);
         }
@@ -215,7 +215,7 @@ final class LoggerPrinter extends Logger {
      * This method is synchronized in order to avoid messy of logs' order.
      */
     private synchronized void log(int logType, String msg, Object... args) {
-        if (!Logger.isGlobalOn() || !settings.isOn() || settings.getLogLevel() == LogLevel.NONE) {
+        if (!LLogger.isGlobalOn() || !settings.isOn() || settings.getLogLevel() == LogLevel.NONE) {
             return;
         }
         String tag = getTag();
@@ -380,7 +380,7 @@ final class LoggerPrinter extends Logger {
         for (int i = MIN_STACK_OFFSET; i < trace.length; i++) {
             StackTraceElement e = trace[i];
             String name = e.getClassName();
-            if (!name.equals(LoggerPrinter.class.getName()) && !name.equals(SLogger.class.getName())) {
+            if (!name.equals(LoggerPrinter.class.getName()) && !name.equals(Logger.class.getName())) {
                 return --i;
             }
         }
