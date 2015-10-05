@@ -360,7 +360,6 @@ final class LoggerPrinter extends Logger {
     private int getMethodCount() {
         Integer count = LOCAL_METHOD_COUNT.get();
         int result = settings.getMethodCount();
-        System.out.println("method count = " + result);
         if (count != null) {
             LOCAL_METHOD_COUNT.remove();
             result = count;

@@ -19,8 +19,16 @@ android {
     }
 }
 
+repositories {
+    jcenter()
+    maven {
+        url  "http://dl.bintray.com/tuanchauict/maven"
+    }
+}
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:21.0.3'
-    compile project(':logger')
+//    compile project(':logger')
+    compile 'com.tuanchauict.logger:logger:1.0.0'
 }
