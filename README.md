@@ -43,7 +43,17 @@ Q: What's new dude?
 
 # Installation
 
-Just pull this project and add it into your project. Sorry, I haven't published on Maven yet.
+Add new repository to your module `build.gradle`
+
+    repositories {
+        maven {
+            url  "http://dl.bintray.com/tuanchauict/maven"
+        }
+    }
+
+and dependencies:
+
+    compile 'com.tuanchauict.logger:logger:1.0.0'
 
 
 # License
