@@ -1,5 +1,8 @@
 This is a hacked version of [Logger](https://github.com/orhanobut/logger) by Orhan Obut.
 
+This logger allows us localize a log so that we can on / off a log debug on a single file or on the
+whole project.
+
 # What have been changed in this hacked?
 
     Logger.v        -->      SLogger.v
