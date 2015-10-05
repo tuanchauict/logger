@@ -16,27 +16,27 @@ public class LoggerTest {
 
   @Test
   public void testInit() {
-    Settings settings = SLogger.init();
+    Settings settings = Logger.init();
     assertThat(settings).isInstanceOf(Settings.class);
 
-    settings = SLogger.init("TAG");
+    settings = Logger.init("TAG");
     assertThat(settings).isInstanceOf(Settings.class);
   }
 
   @Test
   public void testT() {
-    Settings settings = SLogger.t("tag").getSettings();
+    Settings settings = Logger.t("tag").getSettings();
 
     assertThat(settings.getMethodCount()).isEqualTo(2);
 
-    settings = SLogger.t(10).getSettings();
+    settings = Logger.t(10).getSettings();
     assertThat(settings.getMethodCount()).isEqualTo(2);
 
-    settings = SLogger.t("tag", 5).getSettings();
+    settings = Logger.t("tag", 5).getSettings();
     assertThat(settings.getMethodCount()).isEqualTo(2);
 
-    SLogger.init().setMethodCount(0);
-    settings = SLogger.t("tag").getSettings();
+    Logger.init().setMethodCount(0);
+    settings = Logger.t("tag").getSettings();
     assertThat(settings.getMethodCount()).isEqualTo(0);
   }
 

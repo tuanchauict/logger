@@ -1,65 +1,101 @@
 package com.orhanobut.logger;
 
 /**
+ * Logger is a wrapper of {@link android.util.Log}
+ * But more pretty, simple and powerful
+ *
  * @author Orhan Obut
  */
-public abstract class Logger {
-    public static Logger getLocalLogger() {
-        return new LoggerPrinter();
-    }
-
-    public static Logger getLocalLoggerWithTag(String tag) {
-        Logger printer = new LoggerPrinter();
-        printer.init(tag);
-        return printer;
-    }
-
-    public static Logger getLocalLoggerWithTagAndMethodCount(String tag, int count){
-        Logger printer = new LoggerPrinter();
-        printer.init(tag);
-        printer.getSettings().setMethodCount(count);
-        return printer;
-    }
-
-    public static boolean globalOn = true;
-
+public final class Logger {
     public static void globalOn(){
-        globalOn = true;
+        Printer.globalOn();
     }
 
     public static void globalOff(){
-        globalOn = false;
+        Printer.globalOff();
     }
 
-    public static boolean isGlobalOn(){
-        return globalOn;
+    private static final Printer printer = new LocalLogger();
+    private static final String DEFAULT_TAG = "PRETTYLOGGER";
+
+    //no instance
+    private Logger() {
     }
 
-    public abstract Logger t(String tag, int methodCount);
+    /**
+     * It is used to get the settings object in order to change settings
+     *
+     * @return the settings object
+     */
+    public static Settings init() {
+        return printer.init(DEFAULT_TAG);
+    }
 
-    public abstract Settings init(String tag);
+    /**
+     * It is used to change the tag
+     *
+     * @param tag is the given string which will be used in Logger
+     */
+    public static Settings init(String tag) {
+        return printer.init(tag);
+    }
 
-    public abstract Settings getSettings();
+    public static Printer t(String tag) {
+        return printer.t(tag, printer.getSettings().getMethodCount());
+    }
 
-    public abstract void on();
+    public static Printer t(int methodCount) {
+        return printer.t(null, methodCount);
+    }
 
-    public abstract void off();
+    public static Printer t(String tag, int methodCount) {
+        return printer.t(tag, methodCount);
+    }
 
-    public abstract void d(String message, Object... args);
+    public static void d(String message, Object... args) {
+        printer.d(message, args);
+    }
 
-    public abstract void e(String message, Object... args);
+    public static void e(String message, Object... args) {
+        printer.e(null, message, args);
+    }
 
-    public abstract void e(Throwable throwable, String message, Object... args);
+    public static void e(Throwable throwable, String message, Object... args) {
+        printer.e(throwable, message, args);
+    }
 
-    public abstract void w(String message, Object... args);
+    public static void i(String message, Object... args) {
+        printer.i(message, args);
+    }
 
-    public abstract void i(String message, Object... args);
+    public static void v(String message, Object... args) {
+        printer.v(message, args);
+    }
 
-    public abstract void v(String message, Object... args);
+    public static void w(String message, Object... args) {
+        printer.w(message, args);
+    }
 
-    public abstract void wtf(String message, Object... args);
+    public static void wtf(String message, Object... args) {
+        printer.wtf(message, args);
+    }
 
-    public abstract void json(String json);
+    /**
+     * Formats the json content and print it
+     *
+     * @param json the json content
+     */
+    public static void json(String json) {
+        printer.json(json);
+    }
 
-    public abstract void xml(String xml);
+    /**
+     * Formats the json content and print it
+     *
+     * @param xml the xml content
+     */
+    public static void xml(String xml) {
+        printer.xml(xml);
+    }
+
 }

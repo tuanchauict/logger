@@ -1,25 +1,22 @@
 package com.orhanobut.logger;
 
 /**
- * SLogger is a wrapper of {@link android.util.Log}
- * But more pretty, simple and powerful
- *
- * @author Orhan Obut
+ * Created by tuanchauict on 10/5/15.
  */
-public final class SLogger {
+public class StaticLogger {
     public static void globalOn(){
-        Logger.globalOn();
+        Printer.globalOn();
     }
 
     public static void globalOff(){
-        Logger.globalOff();
+        Printer.globalOff();
     }
 
-    private static final Logger printer = new LoggerPrinter();
+    private static final Printer printer = new LocalLogger();
     private static final String DEFAULT_TAG = "PRETTYLOGGER";
 
     //no instance
-    private SLogger() {
+    private StaticLogger() {
     }
 
     /**
@@ -34,21 +31,21 @@ public final class SLogger {
     /**
      * It is used to change the tag
      *
-     * @param tag is the given string which will be used in SLogger
+     * @param tag is the given string which will be used in Logger
      */
     public static Settings init(String tag) {
         return printer.init(tag);
     }
 
-    public static Logger t(String tag) {
+    public static Printer t(String tag) {
         return printer.t(tag, printer.getSettings().getMethodCount());
     }
 
-    public static Logger t(int methodCount) {
+    public static Printer t(int methodCount) {
         return printer.t(null, methodCount);
     }
 
-    public static Logger t(String tag, int methodCount) {
+    public static Printer t(String tag, int methodCount) {
         return printer.t(tag, methodCount);
     }
 
@@ -97,5 +94,4 @@ public final class SLogger {
     public static void xml(String xml) {
         printer.xml(xml);
     }
-
 }
