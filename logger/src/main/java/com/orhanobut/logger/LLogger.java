@@ -3,23 +3,27 @@ package com.orhanobut.logger;
 /**
  * @author Orhan Obut
  */
-public abstract class Printer {
-    public static Printer getLocalLogger() {
-        return new LocalLogger();
+public abstract class LLogger {
+    public static LLogger getLocalLogger() {
+        return new LoggerPrinter();
     }
 
-    public static Printer getLocalLoggerWithTag(String tag) {
-        Printer printer = new LocalLogger();
+    public static LLogger getLocalLoggerWithTag(String tag) {
+        LLogger printer = new LoggerPrinter();
         printer.init(tag);
         return printer;
     }
 
-    public static Printer getLocalLoggerWithTagAndMethodCount(String tag, int count){
-        Printer printer = new LocalLogger();
+    public static LLogger getLocalLoggerWithTagAndMethodCount(String tag, int count){
+        LLogger printer = new LoggerPrinter();
         printer.init(tag);
         printer.getSettings().setMethodCount(count);
         return printer;
     }
+
+    public abstract LLogger withTag(String tag);
+
+    public abstract LLogger withMethodCount(int count);
 
     public static boolean globalOn = true;
 
@@ -35,15 +39,15 @@ public abstract class Printer {
         return globalOn;
     }
 
-    public abstract Printer t(String tag, int methodCount);
+    public abstract LLogger t(String tag, int methodCount);
 
     public abstract Settings init(String tag);
 
     public abstract Settings getSettings();
 
-    public abstract void on();
+    public abstract LLogger on();
 
-    public abstract void off();
+    public abstract LLogger off();
 
     public abstract void d(String message, Object... args);
 

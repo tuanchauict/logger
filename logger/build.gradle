@@ -1,23 +1,114 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
+
+version = '1.0.2'
+group = 'com.tuanchauict.logger'
+
+def siteUrl = 'https://github.com/tuanchauict/logger'
+def gitUrl = 'https://github.com/tuanchauict/logger.git'
+
+
 android {
-  compileSdkVersion 21
-  buildToolsVersion "21.1.1"
+    compileSdkVersion 21
+    buildToolsVersion "21.1.1"
 
-  defaultConfig {
-    minSdkVersion 8
-    targetSdkVersion 21
-  }
+    defaultConfig {
+        minSdkVersion 8
+        targetSdkVersion 21
+        versionCode 2
+        versionName version
+    }
 
-  lintOptions {
-    abortOnError false
-  }
+    lintOptions {
+        abortOnError false
+    }
+
+    buildTypes {
+    }
 }
+
+install {
+    repositories.mavenInstaller {
+        pom {
+            project {
+                packaging 'jar'
+
+                name 'Simple, pretty and powerful logger for single file or all project for android'
+                url siteUrl
+
+                licenses {
+                    license{
+                        name 'The Apache Software License, Version 2.0'
+                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+
+                }
+
+                developers {
+                    developer {
+                        id 'tuanchauict'
+                        name 'Tuan Chau'
+                        email 'tuanchauict@gmail.com'
+                    }
+                }
+                scm {
+                    connection gitUrl
+                    developerConnection gitUrl
+                    url siteUrl
+                }
+            }
+        }
+    }
+}
+
+
 
 dependencies {
-  testCompile 'junit:junit:4.12'
-  testCompile "org.mockito:mockito-core:1.9.5"
-  testCompile "org.robolectric:robolectric:3.0"
-  testCompile 'org.assertj:assertj-core:1.7.0'
+    testCompile 'junit:junit:4.12'
+    testCompile "org.mockito:mockito-core:1.9.5"
+    testCompile "org.robolectric:robolectric:3.0"
+    testCompile 'org.assertj:assertj-core:1.7.0'
 }
 
-apply from: '../maven_push.gradle'
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+task javadoc(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+//    options.encoding = 'UTF-8'
+}
+
+artifacts {
+    archives javadocJar
+    archives sourcesJar
+}
+
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+bintray {
+    user = properties.getProperty("bintray.user")
+    key = properties.getProperty("bintray.apikey")
+
+    configurations = ['archives']
+
+    pkg {
+        repo = "maven"
+        name = "localizelogger"
+        websiteUrl = siteUrl
+        vcsUrl = gitUrl
+        licenses = ["Apache-2.0"]
+        publish = true
+    }
+}
+
+// apply from: '../maven_push.gradle'

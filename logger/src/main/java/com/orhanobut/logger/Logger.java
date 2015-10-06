@@ -8,14 +8,14 @@ package com.orhanobut.logger;
  */
 public final class Logger {
     public static void globalOn(){
-        Printer.globalOn();
+        LLogger.globalOn();
     }
 
     public static void globalOff(){
-        Printer.globalOff();
+        LLogger.globalOff();
     }
 
-    private static final Printer printer = new LocalLogger();
+    private static final LLogger printer = new LoggerPrinter();
     private static final String DEFAULT_TAG = "PRETTYLOGGER";
 
     //no instance
@@ -40,15 +40,15 @@ public final class Logger {
         return printer.init(tag);
     }
 
-    public static Printer t(String tag) {
+    public static LLogger t(String tag) {
         return printer.t(tag, printer.getSettings().getMethodCount());
     }
 
-    public static Printer t(int methodCount) {
+    public static LLogger t(int methodCount) {
         return printer.t(null, methodCount);
     }
 
-    public static Printer t(String tag, int methodCount) {
+    public static LLogger t(String tag, int methodCount) {
         return printer.t(tag, methodCount);
     }
 
