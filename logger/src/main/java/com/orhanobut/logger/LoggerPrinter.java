@@ -75,7 +75,9 @@ final class LoggerPrinter extends LLogger {
     private static final ThreadLocal<Integer> LOCAL_METHOD_COUNT = new ThreadLocal<>();
 
 
-    LoggerPrinter(){}
+    LoggerPrinter() {
+    }
+
     /**
      * It is used to change the tag
      *
@@ -93,12 +95,26 @@ final class LoggerPrinter extends LLogger {
         return settings;
     }
 
-    public void on(){
+    public LLogger on() {
         settings.on();
+        return this;
     }
 
-    public void off(){
+    public LLogger off() {
         settings.off();
+        return this;
+    }
+
+    @Override
+    public LLogger withTag(String tag) {
+        init(tag);
+        return this;
+    }
+
+    @Override
+    public LLogger withMethodCount(int count) {
+        settings.setMethodCount(count);
+        return this;
     }
 
     @Override
