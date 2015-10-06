@@ -20,6 +20,7 @@ Nothing. This can work well with the old Logger, just take a look at Installatio
 
     LOG1.off();
     LOG1.d("This is not shown!");
+    LOG2.d("But this can be seen");
     LOG1.on();
     LOG1.d("This is logged again!");
 
