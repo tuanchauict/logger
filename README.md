@@ -77,7 +77,7 @@ Add new repository to your module `build.gradle`
 
 and dependencies:
 
-    compile 'com.tuanchauict.logger:logger:1.0.2'
+    compile 'com.tuanchauict.logger:logger:1.0.3'
 
 
 # License
