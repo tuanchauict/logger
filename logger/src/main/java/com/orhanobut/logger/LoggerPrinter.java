@@ -231,11 +231,21 @@ final class LoggerPrinter extends LLogger {
      * This method is synchronized in order to avoid messy of logs' order.
      */
     private synchronized void log(int logType, String msg, Object... args) {
+        String message = null;
+        if (!sLogServices.isEmpty()) {
+            message = createMessage(msg, args);
+            for (LogService middleware : sLogServices) {
+                middleware.run(message, logType);
+            }
+        }
+
         if (!LLogger.isGlobalOn() || !settings.isOn() || settings.getLogLevel() == LogLevel.NONE) {
             return;
         }
         String tag = getTag();
-        String message = createMessage(msg, args);
+        if (message == null)
+            message = createMessage(msg, args);
+
         int methodCount = getMethodCount();
 
         logTopBorder(logType, tag);

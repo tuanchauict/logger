@@ -1,9 +1,23 @@
 package com.orhanobut.logger;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author Orhan Obut
  */
 public abstract class LLogger {
+
+    protected static final List<LogService> sLogServices = new ArrayList<>();
+
+    public static void addLogService(LogService middleware){
+        sLogServices.add(middleware);
+    }
+
+    public static void clearLogService(){
+        sLogServices.clear();
+    }
+
     public static LLogger getLocalLogger() {
         return new LoggerPrinter();
     }

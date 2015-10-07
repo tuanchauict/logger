@@ -10,6 +10,8 @@ Nothing. This can work well with the old Logger, just take a look at Installatio
 
 # What new?
 
+## 1. Localize your logger
+
     LLogger LOG1 = LLogger.getLocalLogger();
     LLogger LOG2 = LLogger.getLocalLoggerWithTag("YOUR TAG");
     LLogger LOG3 = LLogger.getLocalLoggerWithTagAndMethodCount("YOUR NEW TAG", 3);
@@ -35,7 +37,34 @@ Nothing. This can work well with the old Logger, just take a look at Installatio
     LLogger LOG4 = LLogger.getLocalLogger().withTag("TAG").withMethodCount(4).on();
     LLogger LOG5 = LLogger.getLocalLogger().withTag("TAG").withMethodCount(4).off();
 
+## 2. Add your favorite service for log (*)
 
+_(*) Something like [Crashlytics](https://www.crashlytics.com/)_
+
+    LLogger.addLogService(new LogService() {
+        @Override
+        public void run(String log, int level) {
+            switch (level) {
+                case Log.DEBUG:
+                    System.out.println("S1 - DEBUG: " + log);
+                    break;
+                case Log.INFO:
+                    System.out.println("S1 - INFO: " + log);
+                    break;
+                case Log.WARN:
+                    System.out.println("S1 - WARN: " + log);
+                    break;
+                case Log.ERROR:
+                    System.out.println("S1 - ERROR: " + log);
+                    break;
+                case Log.VERBOSE:
+                    System.out.println("S1 - VERBOSE: " + log);
+                    break;
+                default:
+                    System.out.println("S1: Er I don't catch this level");
+            }
+        }
+    });
 # Installation
 
 Add new repository to your module `build.gradle`
