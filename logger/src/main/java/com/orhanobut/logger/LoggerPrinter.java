@@ -235,7 +235,7 @@ final class LoggerPrinter extends LLogger {
         if (!sLogServices.isEmpty()) {
             message = createMessage(msg, args);
             for (LogService middleware : sLogServices) {
-                middleware.run(message, logType);
+                middleware.run(TAG, message, logType);
             }
         }
 

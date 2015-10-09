@@ -6,6 +6,7 @@ import android.support.v7.app.ActionBarActivity;
 import com.orhanobut.logger.LLogger;
 import com.orhanobut.logger.LogService;
 import com.orhanobut.logger.Logger;
+
 import android.util.Log;
 
 
@@ -15,55 +16,55 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-    LLogger.addLogService(new LogService() {
-        @Override
-        public void run(String log, int level) {
-            switch (level) {
-                case Log.DEBUG:
-                    System.out.println("S1 - DEBUG: " + log);
-                    break;
-                case Log.INFO:
-                    System.out.println("S1 - INFO: " + log);
-                    break;
-                case Log.WARN:
-                    System.out.println("S1 - WARN: " + log);
-                    break;
-                case Log.ERROR:
-                    System.out.println("S1 - ERROR: " + log);
-                    break;
-                case Log.VERBOSE:
-                    System.out.println("S1 - VERBOSE: " + log);
-                    break;
-                default:
-                    System.out.println("S1: Er I don't catch this level");
+        LLogger.addLogService(new LogService() {
+            @Override
+            public void run(String tag, String log, int level) {
+                switch (level) {
+                    case Log.DEBUG:
+                        System.out.println("S1 - DEBUG: " + log);
+                        break;
+                    case Log.INFO:
+                        System.out.println("S1 - INFO: " + log);
+                        break;
+                    case Log.WARN:
+                        System.out.println("S1 - WARN: " + log);
+                        break;
+                    case Log.ERROR:
+                        System.out.println("S1 - ERROR: " + log);
+                        break;
+                    case Log.VERBOSE:
+                        System.out.println("S1 - VERBOSE: " + log);
+                        break;
+                    default:
+                        System.out.println("S1: Er I don't catch this level");
+                }
             }
-        }
-    });
+        });
 
-    LLogger.addLogService(new LogService() {
-        @Override
-        public void run(String log, int level) {
-            switch (level) {
-                case Log.DEBUG:
-                    System.out.println("S2 - DEBUG: " + log);
-                    break;
-                case Log.INFO:
-                    System.out.println("S2 - INFO: " + log);
-                    break;
-                case Log.WARN:
-                    System.out.println("S2 - WARN: " + log);
-                    break;
-                case Log.ERROR:
-                    System.out.println("S2 - ERROR: " + log);
-                    break;
-                case Log.VERBOSE:
-                    System.out.println("S2 - VERBOSE: " + log);
-                    break;
-                default:
-                    System.out.println("S2: Er I don't catch this level");
+        LLogger.addLogService(new LogService() {
+            @Override
+            public void run(String tag, String log, int level) {
+                switch (level) {
+                    case Log.DEBUG:
+                        System.out.println("S2 - DEBUG: " + log);
+                        break;
+                    case Log.INFO:
+                        System.out.println("S2 - INFO: " + log);
+                        break;
+                    case Log.WARN:
+                        System.out.println("S2 - WARN: " + log);
+                        break;
+                    case Log.ERROR:
+                        System.out.println("S2 - ERROR: " + log);
+                        break;
+                    case Log.VERBOSE:
+                        System.out.println("S2 - VERBOSE: " + log);
+                        break;
+                    default:
+                        System.out.println("S2: Er I don't catch this level");
+                }
             }
-        }
-    });
+        });
 
 
         LLogger LOG1 = LLogger.getLocalLogger();
@@ -92,7 +93,6 @@ public class MainActivity extends ActionBarActivity {
         //Version 1.0.2
         LLogger LOG4 = LLogger.getLocalLogger().withTag("TAG").withMethodCount(4).on();
         LLogger LOG5 = LLogger.getLocalLogger().withTag("TAG").withMethodCount(4).off();
-
 
 
     }
