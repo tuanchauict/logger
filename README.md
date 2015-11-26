@@ -67,15 +67,8 @@ _(*) Something like [Crashlytics](https://www.crashlytics.com/)_
     });
 # Installation
 
-Add new repository to your module `build.gradle`
+Add new this to your module `build.gradle`
 
-    repositories {
-        maven {
-            url "http://jcenter.bintray.com"
-        }
-    }
-
-and dependencies:
 
     compile 'com.tuanchauict.logger:logger:1.0.3'
 
