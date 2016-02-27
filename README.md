@@ -43,7 +43,7 @@ _(*) Something like [Crashlytics](https://www.crashlytics.com/)_
 
     LLogger.addLogService(new LogService() {
         @Override
-        public void run(String log, int level) {
+        public void run(String tag, String log, int level) {
             switch (level) {
                 case Log.DEBUG:
                     System.out.println("S1 - DEBUG: " + log);
@@ -61,7 +61,7 @@ _(*) Something like [Crashlytics](https://www.crashlytics.com/)_
                     System.out.println("S1 - VERBOSE: " + log);
                     break;
                 default:
-                    System.out.println("S1: Er I don't catch this level");
+                    System.out.println("S1: Err I don't catch this level");
             }
         }
     });
@@ -70,7 +70,7 @@ _(*) Something like [Crashlytics](https://www.crashlytics.com/)_
 Add new this to your module `build.gradle`
 
 
-    compile 'com.tuanchauict.logger:logger:1.0.3'
+    compile 'com.tuanchauict.logger:logger:1.0.5'
 
 
 # License
