@@ -259,6 +259,10 @@ final class LoggerPrinter extends LLogger {
 
         int methodCount = getMethodCount();
 
+        if (TextUtils.isEmpty(message)) {
+            message = "Empty/NULL log message";
+        }
+
         logTopBorder(logType, tag);
         logHeaderContent(logType, tag, methodCount);
         //get bytes of message with system's default charset (which is UTF-8 for Android)
@@ -296,6 +300,9 @@ final class LoggerPrinter extends LLogger {
 
         String tag = getTag();
         String message = createMessage(msg, args);
+        if (TextUtils.isEmpty(message)) {
+            message = "Empty/NULL log message";
+        }
         String[] lines = message.split(System.getProperty("line.separator"));
 
         if (lines.length == 1) {
