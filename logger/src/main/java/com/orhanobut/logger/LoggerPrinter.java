@@ -191,6 +191,7 @@ final class LoggerPrinter extends LLogger {
             return;
         }
         try {
+            json = json.trim();
             if (json.startsWith("{")) {
                 JSONObject jsonObject = new JSONObject(json);
                 String message = jsonObject.toString(JSON_INDENT);
