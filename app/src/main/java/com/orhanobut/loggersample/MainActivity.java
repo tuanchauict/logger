@@ -99,6 +99,7 @@ public class MainActivity extends ActionBarActivity {
         Logger.d("This is two\nline of log");
         Logger.d("This is\nthree\nline of log");
 
+        LOG4.json(Dummy.JSON_WITH_NO_LINE_BREAK);
     }
 
 

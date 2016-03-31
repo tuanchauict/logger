@@ -286,7 +286,7 @@ final class LoggerPrinter extends LLogger {
         StackTraceElement[] trace = Thread.currentThread().getStackTrace();
         int stackOffset = getStackOffset(trace) + 1;
         StringBuilder builder = new StringBuilder();
-        builder.append("  (")
+        builder.append("    (")
                 .append(trace[stackOffset].getFileName())
                 .append(":")
                 .append(trace[stackOffset].getLineNumber())
