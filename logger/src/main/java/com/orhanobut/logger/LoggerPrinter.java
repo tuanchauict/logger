@@ -148,7 +148,7 @@ final class LoggerPrinter extends LLogger {
     @Override
     public void e(Throwable throwable, String message, Object... args) {
         if (throwable != null && message != null) {
-            message += " : " + throwable.toString();
+            message += " : " + Log.getStackTraceString(throwable);
         }
         if (throwable != null && message == null) {
             message = throwable.toString();
