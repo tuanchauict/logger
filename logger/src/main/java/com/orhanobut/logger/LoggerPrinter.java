@@ -56,6 +56,10 @@ final class LoggerPrinter extends LLogger {
     private static final char BOTTOM_LEFT_CORNER = '╚';
     private static final char MIDDLE_CORNER = '╟';
     private static final char HORIZONTAL_DOUBLE_LINE = '║';
+    private static final char HORIZONTAL_SINGLE_LINE = '▍';
+    private static final char BEGIN_COMPACT_LINE = '▛';
+    private static final char END_COMPACT_LINE = '▙';
+    private static final char END_COMPACT_SINGLE_LINE = '▉';
     private static final String DOUBLE_DIVIDER = "════════════════════════════════════════════";
     private static final String SINGLE_DIVIDER = "────────────────────────────────────────────";
     private static final String TOP_BORDER = TOP_LEFT_CORNER + DOUBLE_DIVIDER + DOUBLE_DIVIDER;
@@ -242,6 +246,12 @@ final class LoggerPrinter extends LLogger {
         if (!LLogger.isGlobalOn() || !settings.isOn() || settings.getLogLevel() == LogLevel.NONE) {
             return;
         }
+
+        if (sCompactMode) {
+            compactLog(logType, msg, args);
+            return;
+        }
+
         String tag = getTag();
         if (message == null)
             message = createMessage(msg, args);
@@ -250,7 +260,6 @@ final class LoggerPrinter extends LLogger {
 
         logTopBorder(logType, tag);
         logHeaderContent(logType, tag, methodCount);
-
         //get bytes of message with system's default charset (which is UTF-8 for Android)
         byte[] bytes = message.getBytes();
         int length = bytes.length;
@@ -271,6 +280,36 @@ final class LoggerPrinter extends LLogger {
             logContent(logType, tag, new String(bytes, i, count));
         }
         logBottomBorder(logType, tag);
+    }
+
+    private synchronized void compactLog(int logType, String msg, Object... args) {
+        StackTraceElement[] trace = Thread.currentThread().getStackTrace();
+        int stackOffset = getStackOffset(trace) + 1;
+        StringBuilder builder = new StringBuilder();
+        builder.append("  (")
+                .append(trace[stackOffset].getFileName())
+                .append(":")
+                .append(trace[stackOffset].getLineNumber())
+                .append(")");
+        String filename = builder.toString();
+
+        String tag = getTag();
+        String message = createMessage(msg, args);
+        String[] lines = message.split(System.getProperty("line.separator"));
+
+        if (lines.length == 1) {
+            logChunk(logType, tag, END_COMPACT_SINGLE_LINE + " " + lines[0] + filename);
+        } else {
+
+            int l = lines.length - 1;
+            logChunk(logType, tag, BEGIN_COMPACT_LINE + " " + lines[0] + filename);
+
+            for (int i = 1; i < l; i++) {
+                logChunk(logType, tag, HORIZONTAL_SINGLE_LINE + " " + lines[i]);
+            }
+
+            logChunk(logType, tag, END_COMPACT_LINE + " " + lines[l]);
+        }
     }
 
     private void logTopBorder(int logType, String tag) {

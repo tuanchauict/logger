@@ -65,12 +65,39 @@ _(*) Something like [Crashlytics](https://www.crashlytics.com/)_
             }
         }
     });
+
+## 3. Compact mode
+
+Compact mode makes all log into single line with file's link located at the end of line of log. This
+applies for global scope. To use this, just add:
+
+    Logger.compactOn();
+
+After do this, with this code:
+
+    Logger.compactOn();
+    Logger.d("Single line");
+    Logger.d("Single line again");
+    Logger.d("This is two\nline of log");
+    Logger.d("This is\nthree\nline of log");
+
+
+the log will look like this:
+
+    03-31 17:34:06.203 11053-11053/? D/PRETTYLOGGER: ▉ Single line  (MainActivity.java:100)
+    03-31 17:34:06.204 11053-11053/? D/PRETTYLOGGER: ▉ Single line again  (MainActivity.java:101)
+    03-31 17:34:06.204 11053-11053/? D/PRETTYLOGGER: ▛ This is two  (MainActivity.java:102)
+    03-31 17:34:06.204 11053-11053/? D/PRETTYLOGGER: ▙ line of log
+    03-31 17:34:06.204 11053-11053/? D/PRETTYLOGGER: ▛ This is  (MainActivity.java:103)
+    03-31 17:34:06.204 11053-11053/? D/PRETTYLOGGER: ▍ three
+    03-31 17:34:06.204 11053-11053/? D/PRETTYLOGGER: ▙ line of log
+
 # Installation
 
 Add new this to your module `build.gradle`
 
 
-    compile 'com.tuanchauict.logger:logger:1.0.5'
+    compile 'com.tuanchauict.logger:logger:1.1.0'
 
 
 # License

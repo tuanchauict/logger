@@ -15,6 +15,14 @@ public final class Logger {
         LLogger.globalOff();
     }
 
+    public static void compactOn(){
+        LLogger.compactOn();
+    }
+
+    public static void compactOff(){
+        LLogger.compactOff();
+    }
+
     private static final LLogger printer = new LoggerPrinter();
     private static final String DEFAULT_TAG = "PRETTYLOGGER";
 

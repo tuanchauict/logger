@@ -39,18 +39,21 @@ public abstract class LLogger {
 
     public abstract LLogger withMethodCount(int count);
 
-    public static boolean globalOn = true;
+    public static boolean sGlobalOn = true;
+
+    public static boolean sCompactMode = false;
+
 
     public static void globalOn(){
-        globalOn = true;
+        sGlobalOn = true;
     }
 
     public static void globalOff(){
-        globalOn = false;
+        sGlobalOn = false;
     }
 
     public static boolean isGlobalOn(){
-        return globalOn;
+        return sGlobalOn;
     }
 
     public abstract LLogger t(String tag, int methodCount);
@@ -62,6 +65,16 @@ public abstract class LLogger {
     public abstract LLogger on();
 
     public abstract LLogger off();
+
+    public static void compactOn(){
+        sCompactMode = true;
+    }
+
+    public static void compactOff(){
+        sCompactMode = false;
+    }
+
+
 
     public abstract void d(String message, Object... args);
 
