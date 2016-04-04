@@ -1,11 +1,11 @@
 This is a hacked version of [Logger](https://github.com/orhanobut/logger) by Orhan Obut.
 
-This logger allows us localize a log so that we can on / off a log debug on a single file or on the
+This logger allows us localize a logger so that we can on / off a log debug on a single file or on the
 whole project.
 
-# What have been changed in this hacked?
+# Do we have to change alot after long time using Logger?
 
-Nothing. This can work well with the old Logger, just take a look at Installation to know how to use
+Nothing. This can work well with the old Logger, just take a look at **Installation** to know how to use.
 
 
 # What new?
@@ -13,8 +13,8 @@ Nothing. This can work well with the old Logger, just take a look at Installatio
 ## 1. Localize your logger
 
     LLogger LOG1 = LLogger.getLocalLogger();
-    LLogger LOG2 = LLogger.getLocalLoggerWithTag("YOUR TAG");
-    LLogger LOG3 = LLogger.getLocalLoggerWithTagAndMethodCount("YOUR NEW TAG", 3);
+    LLogger LOG2 = LLogger.getLocalLogger().withTag("YOUR TAG");
+    LLogger LOG3 = LLogger.getLocalLogger().withTag("YOUR NEW TAG").withMethodCount(3);
 
     LOG1.d("This with default tag");
     LOG2.d("This changes tag to YOUR TAG");
@@ -32,10 +32,6 @@ Nothing. This can work well with the old Logger, just take a look at Installatio
     LOG3.d("SHOWN");
     Logger.globalOn(); // or LLogger.globalOn();
     LOG1.d("Yeah! I'm here");
-
-    //Version 1.0.2
-    LLogger LOG4 = LLogger.getLocalLogger().withTag("TAG").withMethodCount(4).on();
-    LLogger LOG5 = LLogger.getLocalLogger().withTag("TAG").withMethodCount(4).off();
 
 ## 2. Add your favorite service for log (*)
 
@@ -68,8 +64,8 @@ _(*) Something like [Crashlytics](https://www.crashlytics.com/)_
 
 ## 3. Compact mode
 
-Compact mode makes all log into single line with file's link located at the end of line of log. This
-applies for global scope. To use this, just add:
+Compact mode makes all log into single line with file's link located at the end of the first line of log. This
+applies to the global scope. To use this, just add:
 
     Logger.compactOn();
 
@@ -78,8 +74,8 @@ After do this, with this code:
     Logger.compactOn();
     Logger.d("Single line");
     Logger.d("Single line again");
-    Logger.d("This is two\nline of log");
-    Logger.d("This is\nthree\nline of log");
+    Logger.d("This is two\nlines of log");
+    Logger.d("This is\nthree\nlines of log");
 
 
 the log will look like this:
@@ -87,10 +83,13 @@ the log will look like this:
     03-31 17:34:06.203 11053-11053/? D/PRETTYLOGGER: ▉ Single line  (MainActivity.java:100)
     03-31 17:34:06.204 11053-11053/? D/PRETTYLOGGER: ▉ Single line again  (MainActivity.java:101)
     03-31 17:34:06.204 11053-11053/? D/PRETTYLOGGER: ▛ This is two  (MainActivity.java:102)
-    03-31 17:34:06.204 11053-11053/? D/PRETTYLOGGER: ▙ line of log
+    03-31 17:34:06.204 11053-11053/? D/PRETTYLOGGER: ▙ lines of log
     03-31 17:34:06.204 11053-11053/? D/PRETTYLOGGER: ▛ This is  (MainActivity.java:103)
     03-31 17:34:06.204 11053-11053/? D/PRETTYLOGGER: ▍ three
-    03-31 17:34:06.204 11053-11053/? D/PRETTYLOGGER: ▙ line of log
+    03-31 17:34:06.204 11053-11053/? D/PRETTYLOGGER: ▙ lines of log
+
+
+**NOTE:** You may use compact mode with Local Logger.
 
 # Installation
 
