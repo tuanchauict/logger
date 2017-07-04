@@ -73,9 +73,7 @@ public abstract class LLogger {
     public static void compactOff(){
         sCompactMode = false;
     }
-
-
-
+    
     public abstract void d(String message, Object... args);
 
     public abstract void e(String message, Object... args);
@@ -91,6 +89,10 @@ public abstract class LLogger {
     public abstract void wtf(String message, Object... args);
 
     public abstract void json(String json);
+    
+    public abstract void jsond(String json);
 
     public abstract void xml(String xml);
+    
+    public abstract void todo(String what);
 }

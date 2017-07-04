@@ -178,7 +178,12 @@ final class LoggerPrinter extends LLogger {
     public void wtf(String message, Object... args) {
         log(Log.ASSERT, message, args);
     }
-
+    
+    @Override
+    public void todo(String what) {
+        w(what);
+    }
+    
     /**
      * Formats the json content and print it
      *
@@ -186,6 +191,30 @@ final class LoggerPrinter extends LLogger {
      */
     @Override
     public void json(String json) {
+        if (TextUtils.isEmpty(json)) {
+            d("Empty/Null json content");
+            return;
+        }
+        try {
+            json = json.trim();
+            if (json.startsWith("{")) {
+                JSONObject jsonObject = new JSONObject(json);
+                String message = jsonObject.toString(JSON_INDENT);
+                v(message);
+                return;
+            }
+            if (json.startsWith("[")) {
+                JSONArray jsonArray = new JSONArray(json);
+                String message = jsonArray.toString(JSON_INDENT);
+                v(message);
+            }
+        } catch (JSONException e) {
+            e(e.getCause().getMessage() + "\n" + json);
+        }
+    }
+    
+    @Override
+    public void jsond(String json) {
         if (TextUtils.isEmpty(json)) {
             d("Empty/Null json content");
             return;
@@ -207,7 +236,7 @@ final class LoggerPrinter extends LLogger {
             e(e.getCause().getMessage() + "\n" + json);
         }
     }
-
+    
     /**
      * Formats the json content and print it
      *
