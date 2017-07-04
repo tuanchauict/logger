@@ -52,14 +52,14 @@ final class LoggerPrinter extends LLogger {
     /**
      * Drawing toolbox
      */
-    private static final char TOP_LEFT_CORNER = '╔';
-    private static final char BOTTOM_LEFT_CORNER = '╚';
-    private static final char MIDDLE_CORNER = '╟';
-    private static final char HORIZONTAL_DOUBLE_LINE = '║';
-    private static final char HORIZONTAL_SINGLE_LINE = '▍';
-    private static final char BEGIN_COMPACT_LINE = '▛';
-    private static final char END_COMPACT_LINE = '▙';
-    private static final char END_COMPACT_SINGLE_LINE = '▉';
+    private static final String TOP_LEFT_CORNER = "▉╔";
+    private static final String BOTTOM_LEFT_CORNER = "▉╚";
+    private static final String MIDDLE_CORNER = "▉╟";
+    private static final String HORIZONTAL_DOUBLE_LINE = "▉║";
+    private static final String HORIZONTAL_SINGLE_LINE = "▉▍";
+    private static final String BEGIN_COMPACT_LINE = "▉▛";
+    private static final String END_COMPACT_LINE = "▉▙";
+    private static final String END_COMPACT_SINGLE_LINE = "▉▉";
     private static final String DOUBLE_DIVIDER = "════════════════════════════════════════════";
     private static final String SINGLE_DIVIDER = "────────────────────────────────────────────";
     private static final String TOP_BORDER = TOP_LEFT_CORNER + DOUBLE_DIVIDER + DOUBLE_DIVIDER;
