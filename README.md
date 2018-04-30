@@ -96,7 +96,7 @@ the log will look like this:
 Add new this to your module `build.gradle`
 
 
-    compile 'com.tuanchauict.logger:logger:1.1.4'
+    compile 'com.tuanchauict.logger:logger:1.1.7'
 
 
 # License
